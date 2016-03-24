@@ -1,0 +1,23 @@
+{% extends "life/base.html" %}
+
+{% block app_content %}
+<h1>Welcome to Our Second App!</h1>
+<link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+<script src="https://js.arcgis.com/3.16/"></script>
+<script type="text/javascript">
+require(["esri/map", "dojo/domReady!"], function(Map) {
+  var map = new Map("map", {
+    center: [-118, 34.5],
+    zoom: 8,
+    basemap: "topo"
+  });
+});
+</script>
+<div id="map"></div>
+{% endblock %}
+
+
+{% block app_actions %}
+  <a href="" class="btn btn-default">Next</a>
+  <a href="" class="btn btn-default">Back</a>
+{% endblock %}

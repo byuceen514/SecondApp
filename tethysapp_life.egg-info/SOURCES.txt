@@ -1,0 +1,14 @@
+setup.py
+tethysapp/__init__.py
+tethysapp/life/__init__.py
+tethysapp/life/app.py
+tethysapp/life/controllers.py
+tethysapp/life/handoff.py
+tethysapp/life/init_stores.py
+tethysapp/life/model.py
+tethysapp_life.egg-info/PKG-INFO
+tethysapp_life.egg-info/SOURCES.txt
+tethysapp_life.egg-info/dependency_links.txt
+tethysapp_life.egg-info/namespace_packages.txt
+tethysapp_life.egg-info/not-zip-safe
+tethysapp_life.egg-info/top_level.txt
