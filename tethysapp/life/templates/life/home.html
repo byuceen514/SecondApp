@@ -1,23 +1,387 @@
 {% extends "life/base.html" %}
 
+{% load staticfiles %}
+
 {% block app_content %}
-<h1>Welcome to Our Second App!</h1>
-<link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
-<script src="https://js.arcgis.com/3.16/"></script>
-<script type="text/javascript">
-require(["esri/map", "dojo/domReady!"], function(Map) {
-  var map = new Map("map", {
-    center: [-118, 34.5],
-    zoom: 8,
-    basemap: "topo"
-  });
-});
-</script>
-<div id="map"></div>
-{% endblock %}
+<!DOCTYPE html>
+<!--<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Maps Toolbar</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/dijit/themes/nihilo/nihilo.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+    <style>
+      html, body, #mainWindow {
+        font-family: sans-serif;
+        height: 100%;
+        width: 100%;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      #header {
+        height: 80px;
+        overflow: auto;
+        padding: 0.5em;
+      }
+    </style>
+
+    <script src="https://js.arcgis.com/3.16/"></script>
+    <script>
+      var map, toolbar, symbol, geomTask;
+
+      require([
+        "esri/map",
+        "esri/toolbars/draw",
+        "esri/graphic",
+        "esri/Color",
+        "esri/graphicsUtils",
+        "esri/tasks/Geoprocessor",
+        "esri/tasks/FeatureSet",
+
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/symbols/SimpleFillSymbol",
+
+        "dojo/parser", "dijit/registry",
+
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/form/Button", "dijit/WidgetSet", "dojo/domReady!"
+      ], function(
+        Map, Draw, Graphic,Color,graphicsUtils,Geoprocessor,FeatureSet,
+        SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol,
+        parser, registry
+      ) {
+        parser.parse();
+
+        map = new Map("map", {
+          basemap: "streets",
+          center: [-111.469, 39.6],
+          zoom: 7
+        });
+
+        var gp = new Geoprocessor("http://geoserver.byu.edu/arcgis/rest/services/TMR/TrailPathModel3/GPServer/TrailPathModel");
+        gp.setOutputSpatialReference({
+              wkid: 102100
+            });
+        map.on("load", createToolbar);
+
+        // loop through all dijits, connect onClick event
+        // listeners for buttons to activate drawing tools
+        registry.forEach(function(d) {
+          // d is a reference to a dijit
+          // could be a layout container or a button
+          if ( d.declaredClass === "dijit.form.Button" ) {
+            d.on("click", activateTool);
+          }
+        });
+
+        function activateTool() {
+        map.graphics.clear();
+          var tool = this.label.toUpperCase().replace(/ /g, "_");
+          toolbar.activate(Draw[tool]);
+          map.hideZoomSlider();
+        }
+
+        function createToolbar(themap) {
+          toolbar = new Draw(map);
+          toolbar.on("draw-end", addToMap);
+        }
+
+        function addToMap(evt) {
+          var symbol;
+          toolbar.deactivate();
+          map.showZoomSlider();
+          switch (evt.geometry.type) {
+            case "point":
+            case "multipoint":
+              symbol = new SimpleMarkerSymbol();
+              break;
+            case "polyline":
+              symbol = new SimpleLineSymbol();
+              break;
+            default:
+              symbol = new SimpleFillSymbol();
+              break;
+          }
+          var graphic = new Graphic(evt.geometry, symbol);
+          map.graphics.add(graphic);
+
+          var features = [];
+            features.push(graphic);
+            var featureSet = new FeatureSet();
+            featureSet.features = features;
+            var params = {
+              "Input_Line_Features": featureSet,
+            };
+            gp.execute(params, getProfile);
+        }
+        function getProfile(results, messages){
+        	 var features = results[0].value.features;
+        	 var elevation_values = [];
+        	 for(var f = 0,fl=features.length; f < fl; f++){
+	        	 var z = results[0].value.features[f].attributes['FIRST_Z'];
+	        	 elevation_values.push(z);
+        	 }
+        	 console.log(elevation_values);
+        	 table = console.log(elevation_values);
+        var elev = elevation_values.value
+        var lowestelev = elevation_values.slice(0,10000);
+        var thelowest = Math.min.apply(null, elevation_values);
+        var highestelev = Math.max.apply(null, elevation_values);
+        var range = highestelev - thelowest
+        if (range < 1000) {
+          difficulty = "Easy"
+          }
+        if (range <= 3000 && range >=1000) {
+          difficulty = "Moderate"
+          }
+        if (range > 3000) {
+          difficulty = "Hard"
+          }
+        window.alert(difficulty);
+
+        }
+      });
+    </script>
+  </head>
+  <body class="nihilo">
+
+  <div id="mainWindow" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'">
+    <div id="header" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
+      <span>Draw:<br /></span>
+      <button data-dojo-type="dijit/form/Button">Polyline</button>
+      <button data-dojo-type="dijit/form/Button">Freehand Polyline</button>
+    </div>
+    <div id="map" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'"></div>
+  </div>
+
+  </body>
+</html>-->
+
+<!--.......-->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Maps Toolbar</title>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/dijit/themes/nihilo/nihilo.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.16/esri/css/esri.css">
+    <style>
+      html, body, #mainWindow {
+        font-family: sans-serif;
+        height: 100%;
+        width: 100%;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      #header {
+        height: 0px;
+        overflow: auto;
+        padding: 0.5em;
+      }
+      #map {
+        height: 550px;
+        width: 1215px;
+        margin: 0px 0px 0px 150px;
+        border: 2px solid black;
+      }
 
 
-{% block app_actions %}
-  <a href="" class="btn btn-default">Next</a>
-  <a href="" class="btn btn-default">Back</a>
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"       type="text/javascript"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://js.arcgis.com/3.16/"></script>
+    <script>
+      var map, toolbar, symbol, geomTask;
+
+      require([
+        "esri/map",
+        "esri/toolbars/draw",
+        "esri/graphic",
+        "esri/Color",
+        "esri/graphicsUtils",
+        "esri/tasks/Geoprocessor",
+        "esri/tasks/FeatureSet",
+
+        "esri/symbols/SimpleMarkerSymbol",
+        "esri/symbols/SimpleLineSymbol",
+        "esri/symbols/SimpleFillSymbol",
+
+        "dojo/parser", "dijit/registry",
+
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/form/Button", "dijit/WidgetSet", "dojo/domReady!"
+      ], function(
+        Map, Draw, Graphic,Color,graphicsUtils,Geoprocessor,FeatureSet,
+        SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol,
+        parser, registry
+      ) {
+        parser.parse();
+
+        map = new Map("map", {
+          basemap: "streets",
+          center: [-111.469, 39.428],
+          zoom: 7
+        });
+
+        var gp = new Geoprocessor("http://geoserver.byu.edu/arcgis/rest/services/TMR/TrailPathModel3/GPServer/TrailPathModel");
+        gp.setOutputSpatialReference({
+              wkid: 102100
+            });
+        map.on("load", createToolbar);
+
+        // loop through all dijits, connect onClick event
+        // listeners for buttons to activate drawing tools
+        registry.forEach(function(d) {
+          // d is a reference to a dijit
+          // could be a layout container or a button
+          if ( d.declaredClass === "dijit.form.Button" ) {
+            d.on("click", activateTool);
+          }
+        });
+
+        function activateTool() {
+        map.graphics.clear();
+          var tool = this.label.toUpperCase().replace(/ /g, "_");
+          toolbar.activate(Draw[tool]);
+          map.hideZoomSlider();
+        }
+
+        function createToolbar(themap) {
+          toolbar = new Draw(map);
+          toolbar.on("draw-end", addToMap);
+        }
+
+        function addToMap(evt) {
+          var symbol;
+          toolbar.deactivate();
+          map.showZoomSlider();
+          switch (evt.geometry.type) {
+            case "point":
+            case "multipoint":
+              symbol = new SimpleMarkerSymbol();
+              break;
+            case "polyline":
+              symbol = new SimpleLineSymbol();
+              break;
+            default:
+              symbol = new SimpleFillSymbol();
+              break;
+          }
+          var graphic = new Graphic(evt.geometry, symbol);
+          map.graphics.add(graphic);
+
+          var features = [];
+            features.push(graphic);
+            var featureSet = new FeatureSet();
+            featureSet.features = features;
+            var params = {
+              "Input_Line_Features": featureSet,
+            };
+            gp.execute(params, getProfile);
+        }
+
+
+        function getProfile(results, messages){
+          var elevation_values = [];
+             var features = results[0].value.features;
+
+             for(var f = 0,fl=features.length; f < fl; f++){
+                 var z = results[0].value.features[f].attributes['FIRST_Z'];
+                 elevation_values.push(z);
+             }
+             console.log(elevation_values);
+             var elev = elevation_values.value
+        var thelowest = Math.min.apply(null, elevation_values);
+        var highestelev = Math.max.apply(null, elevation_values);
+        var range = highestelev - thelowest
+        if (range < 1000) {
+          difficulty = "Hike Difficulty: Easy"
+          }
+        if (range <= 3000 && range >=1000) {
+          difficulty = "Hike Difficulty: Moderate"
+          }
+        if (range > 3000) {
+          difficulty = "Hike Difficulty: Hard"
+          }
+        window.alert(difficulty);
+
+
+              $('#container').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Elevation Profile'
+        },
+        xAxis: {
+            allowDecimals: false,
+            labels: {
+                formatter: function () {
+                    return this.value; // clean, unformatted number for year
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Height (ft)'
+            },
+            labels: {
+                formatter: function () {
+                    return this.value;
+                }
+            }
+        },
+        tooltip: {
+            pointFormat: '<b>{point.y}</b>'
+        },
+        plotOptions: {
+            area: {
+                pointStart: 0,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        },
+        series: [{
+            name: 'Elevation Profile',
+            data: elevation_values
+        }]
+    });
+        }
+      });
+    </script>
+  </head>
+  <body class="nihilo">
+
+  <div id="mainWindow">
+    <div id="header">
+
+    </div>
+    <div id="map"></div>
+    <div id="container" style="min-width: 300px; height: 200px; margin: 10px 90px 0px 150px; border: 2px solid black"></div>
+  </div>
+
+  </body>
+</html>
+
 {% endblock %}

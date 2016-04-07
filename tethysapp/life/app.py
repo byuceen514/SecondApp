@@ -24,8 +24,14 @@ class Secondapp(TethysAppBase):
         UrlMap = url_map_maker(self.root_url)
 
         url_maps = (UrlMap(name='home',
-                           url='life',
+                           url='home',
                            controller='life.controllers.home'),
+                    UrlMap(name='help',
+                           url='help',
+                           controller='life.controllers.help'),
+                    UrlMap(name='documentation',
+                           url='documentation',
+                           controller='life.controllers.documentation'),
         )
 
         return url_maps
