@@ -6,9 +6,9 @@ class Secondapp(TethysAppBase):
     Tethys app class for secondapp.
     """
 
-    name = 'Trail Profiler'
+    name = 'Utah Trail Profiler'
     index = 'life:home'
-    icon = 'life/images/icon.gif'
+    icon = 'life/images/loneArch.jpg'
     package = 'life'
     root_url = 'life'
     color = '#34495e'

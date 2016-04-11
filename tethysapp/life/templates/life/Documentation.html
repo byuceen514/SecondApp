@@ -11,7 +11,47 @@
     <title>Title</title>
 </head>
 <body>
-
+<h1 dir="ltr">Software Design Document: Trail Mix</h1>
+<p dir="ltr">Created by Marlee Seat, Tyler Remund, and Robert Stevens</p>
+<p dir="ltr">&nbsp;</p>
+<h2 dir="ltr">Technical Specifications</h2>
+<h3 dir="ltr">Software Details</h3>
+<p dir="ltr">The purpose of this project was to make a web app that would create an elevation profile for a drawn route. The script was written in PyCharm, uploaded to GitHub, and then published to a BYU server. The app was created by Robert Stevens, Marlee Seat, and Tyler Remund.</p>
+<p dir="ltr">&nbsp;</p>
+<h3 dir="ltr">Compatibility and Limitations</h3>
+<p dir="ltr">The app has only been tested on Google Chrome. Other browsers may or may not be compatible. This app uses javascript, and requires a browser with javascript plugins/compatibility. A copy of the script may be obtained from Tyler Remund (tremund@gmail.com).</p>
+<p dir="ltr">&nbsp;</p>
+<h3 dir="ltr">License</h3>
+<p dir="ltr">Copyright (c) 2016 Robert Stevens, Marlee Seat, Tyler Remund.</p>
+<p dir="ltr">Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p dir="ltr">The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p dir="ltr">THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+<p><strong>&nbsp;</strong></p>
+<h2 dir="ltr">Software Design</h2>
+<h3 dir="ltr">Purpose</h3>
+<p dir="ltr">This app was developed to provide hikers with an easy to use tool to judge the difficulty of a certain route. The app allows the user to create their own trail anywhere within the state of Utah, receive a notification regarding the calculated difficulty of such route, and then view a profile of how the elevation would change along the route.</p>
+<h3 dir="ltr">Structure</h3>
+<p dir="ltr">The script is divided into several HTML/ Javascript pages.</p>
+<h3 dir="ltr">Base</h3>
+<p dir="ltr">All pages use the Base page. This page contains the Tethys page layout and custom sidebar.. &nbsp;&nbsp;</p>
+<h3 dir="ltr">Home</h3>
+<p dir="ltr">This page contains the Javascript code to run the Trail Profiler application.</p>
+<h3 dir="ltr">Help File/ Documentation</h3>
+<p dir="ltr">This section of code contains the HTML code to view the code the user is currently reading as well as the Help File code.</p>
+<p dir="ltr">&nbsp;</p>
+<h3 dir="ltr">Files</h3>
+<p dir="ltr">The Script operates off of a basemap obtained from the Unites States Geological Survey (USGS) site. It also uses an elevation DEM of the state of Utah which had been previously uploaded to the server. The icon for the app was downloaded from the web and uploaded with the script to GitHub.</p>
+<p dir="ltr">&nbsp;</p>
+<h3 dir="ltr">User Interface Elements</h3>
+<p> The primary user interface element is the interactive map that allows users to draw a polyline that will then be displayed as an elevation profile. This element allows users to draw a line anywhere in the state of Utah, and see the elevation profile of that line. In addition, the alert box that pops up notifies the user of the difficulty of the route. </p>
+<h3 dir="ltr">Program Flow Chart</h3>
+<p dir="ltr">This diagram outlines the steps taken to build this Tethys App.</p>
+<p dir="ltr"><img src="https://lh4.googleusercontent.com/umZEMtt0r3DG2ZbKQRaOz29dGByGEjFLrbmRGplK9uGCwXgJmU0MxFV0nr-E3gZGK1n6aRLCNUqBos8wdvt6SVTGfQvh30AvMv0sk43AvENgIwlxLOCqmdvBIN_dVOHgTOwHJVXE" alt="" width="624" height="117" /></p>
+<p dir="ltr">&nbsp;</p>
+<p dir="ltr">This is a diagram of the model builder model that was exported to the server.</p>
+<p><strong>&nbsp;</strong></p>
+<p dir="ltr"><img src="https://lh3.googleusercontent.com/R-IVZldk83az2YLhKclvJxQRnF5G88Ut84M_UZeZtB0LDpU3arcLJ8vSe475OfpKKtAx7XBkPkJ5VX-EdLqBySx32aCHdscLf7Y9D8CV-gZ7UEdLTjjM-SZ-LbqTIXSj3bKEKFhA" alt="" width="623" height="407" /></p>
+<p><strong><br /><br /><br /></strong></p>
 </body>
 </html>
 {% endblock %}

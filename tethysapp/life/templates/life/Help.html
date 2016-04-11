@@ -8,10 +8,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Help</title>
 </head>
-<body>
-Hello?
-</body>
+<h3>
+How to Use the App:
+</h3>
+<p>
+1.) Click on the Home Button
+</p>
+<p>
+2.) Under Draw, click either "Polyline" or "Freehand Polyline"
+</p>
+<p>
+Polyline will draw a series of connected straight lines. Freehand Polyline will draw a line in whatever shape the user desires.
+</p>
+<p>
+3.) Wait for the server to compute the profile. A popup box will then appear with the difficulty of the chosen route.
+</p>
+<p>
+4.) Click "OK" to exit the popup box. A profile of the given route will appear below the map.
+</p>
+<p>
+The Y-Axis units of the profile are in feet, X-Axis units are in 1/20ths of a mile.
+</p>
+<p dir="ltr"><strong>&nbsp;</strong></p>
+<h1 dir="ltr">Purpose</h1>
+<p dir="ltr">The purpose of the Trail Profiler App is to create a webpage through Arcmap and Tethys that allows the user to draw a polyline anywhere in Utah. An elevation graph is displayed and the hike difficulty is given for the route. A great deal of effort was put into the project so that the pieces of the map would be both attractive and easy to understand.This site has a user friendly surface and is useful for anyone wanting to get outside. The founders of this App made a model in Arcmap and then pushed it to a server so Arcmap would not be needed in using this website. The interface was created in Tethys using Virtual Box, and was then published to the web. The HTML and mapping website were created to fulfill a project assignment in the GIS Programming for Engineers course taught by Dr. Dan Ames of the Civil Engineering Department at Brigham Young University.</p>
+<p><strong>&nbsp;</strong></p>
+<h1 dir="ltr">Required Software</h1>
+<p dir="ltr">In order to use this website, an internet connection is all that is required. Every process that the website does is done from a server where an Arcmap model is stored. After processing the request from the user, HTML code takes the data and creates an elevation profile.</p>
+<p dir="ltr">&nbsp;</p>
+<h1 dir="ltr">Restrictions</h1>
+<p dir="ltr">The is one restriction to this website. Only the state of Utah can be analyzed for elevation data and trail difficulty. If the user tries to draw a polyline outside of Utah it will not be analyzed.</p>
+<p dir="ltr">&nbsp;</p>
+<h1 dir="ltr">Configuring Input Data</h1>
+<p dir="ltr">The first step in creating this website was to create a model in Arcmap and send it to the BYU server. Next, a new Tethys App was created in VirtualBox. This app referenced the BYU server for testing. Our Tethys App was pushed onto GitHub where it was published to the web. This website now uses another server from GitHub to process the results for the hiking trails.</p>
+<p><strong>&nbsp;</strong></p>
+<h1 dir="ltr">How to Use the Website</h1>
+<p dir="ltr">On the Home page, click the Polyline or Freehand button under Draw. Selecting one of these allows the user to draw a line on the map. After a few seconds, a dialog box will pop up that says how difficult the hike will be. Press OK, then an elevation profile will be created beneath the map. Select the Help button on the far left side for useful user information or the Documentation button for Technical Specifications.</p>
+<p>&nbsp;</p>
+
 </html>
 {% endblock %}
