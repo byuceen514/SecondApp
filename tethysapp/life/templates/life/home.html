@@ -186,7 +186,7 @@
         padding: 0;
       }
       #header {
-        height: 0px;
+        height: 50px;
         overflow: auto;
         padding: 0.5em;
       }
@@ -235,6 +235,8 @@
           center: [-111.469, 39.428],
           zoom: 7
         });
+        var baselayer=new esri.layers.ArcGISDynamicMapServiceLayer("http://geoserver.byu.edu/arcgis/rest/services/HikingExplorerJS/Trails_Utah/MapServer");
+        map.addLayer(baselayer);
 
         var gp = new Geoprocessor("http://geoserver.byu.edu/arcgis/rest/services/TMR/TrailPathModel3/GPServer/TrailPathModel");
         gp.setOutputSpatialReference({
@@ -316,7 +318,8 @@
         if (range > 3000) {
           difficulty = "Hike Difficulty: Hard"
           }
-        window.alert(difficulty);
+        document.getElementById("hike").innerHTML = difficulty;
+
 
 
               $('#container').highcharts({
@@ -328,9 +331,12 @@
         },
         xAxis: {
             allowDecimals: false,
+            title: {
+                text: 'Distance (miles)'
+            },
             labels: {
                 formatter: function () {
-                    return this.value; // clean, unformatted number for year
+                    return this.value/20; // clean, unformatted number for year
                 }
             }
         },
@@ -374,8 +380,7 @@
   <body class="nihilo">
 
   <div id="mainWindow">
-    <div id="header">
-
+    <div id="hike" style="font-size:20pt">
     </div>
     <div id="map"></div>
     <div id="container" style="min-width: 300px; height: 200px; margin: 10px 75px 0px 150px; border: 2px solid black"></div>

@@ -12,7 +12,7 @@ class Secondapp(TethysAppBase):
     package = 'life'
     root_url = 'life'
     color = '#34495e'
-    description = 'Place a brief description of your app here.'
+    description = 'This App will create an elevation profile for a drawn path in the state of Utah'
     enable_feedback = False
     feedback_emails = []
 
